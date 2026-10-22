@@ -1,3 +1,4 @@
+/*All the types required for the website*/
 export type TabType = 'Sketch' | 'MVP' | 'Mentor' | 'Traps' | 'Raw';
 
 export interface MvpContent {

@@ -7,3 +7,70 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
+
+
+/* Notebook physical dot grid background */
+.notebook-dot-grid {
+  background-color: #ffffff;
+  background-image: radial-gradient(#d1d1d6 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+.notebook-input-grid {
+  background-color: #f9f8f3;
+  background-image: radial-gradient(#e2e2e7 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.font-hand {
+  font-family: 'Architects Daughter', 'Patrick Hand', 'Kalam', 'Caveat', sans-serif;
+}
+
+
+/* Sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(161, 161, 170, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(113, 113, 122, 0.5);
+}
+
+
+/*Styling the selection to be gray instead of blue*/
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible { /*Add a nice gray outline when using tab to navigate*/
+  box-shadow: 0 0 0 2px rgba(245, 245, 247, 1), 0 0 0 4px rgba(28, 28, 30, 0.2);
+}
+
+/*White container*/
+.paper-card {
+  background: #ffffff;
+  border: 1px solid rgba(229, 229, 234, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.02), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+
+/*Animation of the listening icon for voice dictation*/
+@keyframes voiceBar {
+  0%, 100% { height: 6px; }
+  50% { height: 22px; }
+}
+
+.animate-voice-1 { animation: voiceBar 1s ease-in-out infinite; }
+.animate-voice-2 { animation: voiceBar 1.2s ease-in-out 0.2s infinite; }
+.animate-voice-3 { animation: voiceBar 0.9s ease-in-out 0.4s infinite; }
+.animate-voice-4 { animation: voiceBar 1.1s ease-in-out 0.1s infinite; }
+.animate-voice-5 { animation: voiceBar 0.8s ease-in-out 0.3s infinite; }

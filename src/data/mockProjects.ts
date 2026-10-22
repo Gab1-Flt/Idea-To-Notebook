@@ -1,5 +1,6 @@
 import type { ProjectIdea } from "../types/project";
 
+/*MockData for Project 1*/
 export const INITIAL_PROJECTS : ProjectIdea[] = [
     {
         id : 'project-1',
