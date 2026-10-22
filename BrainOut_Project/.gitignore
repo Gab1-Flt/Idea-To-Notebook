@@ -1,0 +1,53 @@
+# Logs
+logs
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies / Build
+node_modules/
+bower_components/
+dist/
+dist-ssr/
+
+# Environment & Local files
+.env
+.env.local
+*.local
+
+# Editor directories and files (.vscode & .idea)
+.idea/
+.DS_Store
+Thumbs.dz
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime*
+
+# VS Code Specific (Garde uniquement les configs utiles si tu en as)
+.history/
+*.vsix
+.ionide/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Design / Assets temporaires
+psd/
+thumb/
+sketch/
+**/*.backup.*
+**/*.back.*
+
+# Fichiers d'environnement locaux
+.env
+.env.local
+.env.*.local
