@@ -45,6 +45,7 @@ export interface Sketch {
 export interface ProjectIdea {
     id : string;
     title : string;
+    oneLiner : string;
     rawInput : string;
     notebookSketch? : Sketch;
     createdAt : string;

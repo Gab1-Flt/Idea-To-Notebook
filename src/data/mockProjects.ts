@@ -5,6 +5,7 @@ export const INITIAL_PROJECTS : ProjectIdea[] = [
     {
         id : 'project-1',
         title : 'This is a Demo Title - TITLE TITLE',
+        oneLiner: 'OneLiner of the first project test',
         rawInput : 'Fake raw input in order to simulate a fake project. This is a fake input and it is supposed to appear in the raw input section',
         notebookSketch : {
             dateTitle : 'October 2026',
