@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from 'framer-motion';
 import { ArrowRight, BrainCircuit, Mic, MicOff } from "lucide-react";
-import { pre } from "framer-motion/client";
 
 
 interface BrainDumpZoneProps {
@@ -16,11 +15,9 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
     loadingProgressBar
 }) => {
     const [rawInput, setRawInput] = useState('');
-    const [interimTranscript, setInterimTranscript] = useState('');
     const [isListening, setIsListening] = useState<boolean>(false);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const recognitionRef = useRef<any>(null);
-    const interimRef = useRef('');
 
     useEffect(() => {
         if (textareaRef.current){
@@ -37,17 +34,13 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
             const recognition = new SpeechRecognition();
             recognition.continuous = true;
             recognition.lang = navigator.language;
-            recognition.interimResults = true;
 
             recognition.onresult = (event: any) => {
-                let interim = '';
                 let final = '';
 
                 for (let i = event.resultIndex; i < event.results.length; ++i) {
                     if (event.results[i].isFinal) {
                         final += event.results[i][0].transcript;
-                    } else {
-                        interim += event.results[i][0].transcript;
                     }
                 }
 
@@ -57,27 +50,14 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
                         return prev + (needsSpace ? ' ' : '') + final;
                     });
                 }
-
-                setInterimTranscript(interim);
-                interimRef.current = interim;
             }
 
             recognition.onerror = () => {
                 console.warn("Speech Recognition Error");
                 setIsListening(false);
-                setInterimTranscript('');
-                interimRef.current = '';
             }
 
             recognition.onend = () => {
-                if(interimRef.current){
-                    setRawInput((prev) => {
-                        const needsSpace = prev && !prev.endsWith(' ') && !prev.endsWith('\n');
-                        return prev + (needsSpace ? ' ' : '') + interimRef.current;
-                    })
-                    interimRef.current = '';
-                }
-                setInterimTranscript('');
                 setIsListening(false);
             }
             recognitionRef.current = recognition;
@@ -100,19 +80,9 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
             if(recognitionRef.current){
                 recognitionRef.current.stop();
             }
-            if(interimRef.current) {
-                setRawInput((prev) => {
-                    const needsSpace = prev && !prev.endsWith(' ') && !prev.endsWith('\n');
-                    return prev + (needsSpace ? ' ' : '') + interimRef.current;
-                });
-                interimRef.current = '';
-                setInterimTranscript('');
-            }
             setIsListening(false);
         } else {
             try {
-                setInterimTranscript('');
-                interimRef.current = '';
                 recognitionRef.current?.start();
                 setIsListening(true);
             } catch (e) {
@@ -129,22 +99,13 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
     };
 
     const handleSubmit = () => {
-        const fullText = isListening && interimTranscript
-        ? `${rawInput}${rawInput && !rawInput.endsWith(' ') && !rawInput.endsWith('\n') ? ' ' : ''}${interimTranscript}`
-        : rawInput;
-        if(!fullText.trim() || isLoading) return;
+        if(!rawInput.trim() || isLoading) return;
         if(isListening && recognitionRef.current) {
             recognitionRef.current.stop();
             setIsListening(false);
-            setInterimTranscript('');
-            interimRef.current = '';
         }
-        onSubmitIdea(fullText);
+        onSubmitIdea(rawInput);
     }
-
-    const displayValue = isListening && interimTranscript
-    ? `${rawInput}${rawInput && !rawInput.endsWith(' ') && !rawInput.endsWith('\n') ? ' ' : ''}${interimTranscript}`
-    : rawInput;
 
     return (
         <div className="flex-1 flex flex-col p-4 items-center justify-center md:p-8 max-w-5xl mx-auto w-full min-h-[calc(100vh-4rem)]">
@@ -181,11 +142,9 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
                 {/* Text Area */}
                 <textarea 
                     ref={textareaRef}
-                    value={displayValue}
+                    value={rawInput}
                     onChange={(e) => {
                         setRawInput(e.target.value);
-                        setInterimTranscript('');
-                        interimRef.current = '';
                     }}
                     onKeyDown={handleKeyDown}
                     disabled={isLoading}
