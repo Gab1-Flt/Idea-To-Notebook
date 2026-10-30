@@ -63,7 +63,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             )}
 
             <aside className={`fixed md:static inset-y-0 left-0 z-40 flex flex-col bg-[#f5f5f7]/90 backdrop-blur-md border-r border-neutral-200/80 transition-all duration-350 ease-in-out ${
-            isOpen ? 'w-80 translate-x-0 overflow-hidden' : 'w-0 -translate-x-full md:w-0 md:translate-x-0 overflow-hidden'
+            isOpen ? 'w-80 translate-x-0 overflow-hidden' : 'w-0 -translate-x-full border-r-0 md:border-r-0 md:w-0 md:translate-x-0 overflow-hidden'
             }`}
             >
                 {isOpen && (
