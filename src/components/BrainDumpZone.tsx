@@ -111,13 +111,13 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
         <div className="flex-1 flex flex-col p-4 items-center justify-center md:p-8 max-w-5xl mx-auto w-full min-h-[calc(100vh-4rem)]">
 
             {/*Header*/}
-            <div className="flex flex-col items-center mb-8 space-y-2 animate-fade-in">
+            <div className="text-center mb-8 space-y-2 animate-fade-in">
                 <h2 className="font-semibold text-3xl md:text-4xl tracking-tight text-neutral-900 font-sans">Unload your thoughts</h2>
                 <p className="text-neutral-500 text-sm max-w-md mx-auto font-normal">Write or speak your raw idea to structure it instantly.</p>
             </div>
 
             {/*Main Container*/}
-            <div className={`paper-card rounded-3xl p-5 md:p-7 transition-all duration-200 
+            <div className={`paper-card w-full rounded-3xl p-5 md:p-7 transition-all duration-200 
             ${isListening ? 'ring-2 ring-neutral-900 border-neutral-400 bg-white' : 'focus-within:border-neutral-400'
             }`}>
                 {/*Top Bar*/}
