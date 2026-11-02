@@ -32,9 +32,10 @@ export interface MileStoneItem {
 
 export interface Sketch {
     dateTitle : string;
-    dateStamp : string;
+    dayStamp : string;
     monthStamp: string;
-    subtitle : string;
+    versionBadge: string;
+    subTitle : string;
     mileStones : MileStoneItem[];
     quote : string;
     workProjects : WorkProjectItem[];
