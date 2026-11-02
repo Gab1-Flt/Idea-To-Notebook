@@ -24,17 +24,34 @@ export const App: React.FC = () => {
     return INITIAL_PROJECTS;
   })
 
+  // Update a project
+  const handleUpdateProject = (updated: ProjectIdea) => {
+    setProjects((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+  };
+
+  // Toggle favorite
+  const handleToggleFavorite = (id: string) => {
+    setProjects((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, isFavorite: !p.isFavorite } : p))
+    );
+  };
+
   const activeProject = projects.find((p) => p.id === activeProjectId);
+
+  const handleDeleteProject = (deletedId: string) => {
+    setProjects((prev) => prev.filter((p) => (p.id !== deletedId)));
+  }
 
   return (
     <div className='min-h-screen flex'>
-      <Sidebar projectList={INITIAL_PROJECTS} isOpen={isSidebarOpen} activeProjectId={activeProjectId} onSelectProject={(id) => setActiveProjectID(id)} onDeleteProjecte={()=>{}} onNewProject={()=>setActiveProjectID(null)} onOpenSettings={()=>{}} onToggleFavorite={()=>{}} onToggleOpen={() => setIsSidebarOpen(!isSidebarOpen)}/>
-      {activeProject ? (
-        <ProjectView project={activeProject} onBackToHome={() => {}} onUpdateProject={() => {}}/>
+      <Sidebar projectList={projects} isOpen={isSidebarOpen} activeProjectId={activeProjectId} onSelectProject={(id) => setActiveProjectID(id)} onDeleteProjecte={handleDeleteProject} onNewProject={()=>setActiveProjectID(null)} onOpenSettings={()=>{}} onToggleFavorite={handleToggleFavorite} onToggleOpen={() => setIsSidebarOpen(!isSidebarOpen)}/>
+      <main className="flex-1 flex flex-col overflow-y-auto relative">
+        {activeProject ? (
+        <ProjectView project={activeProject} onBackToHome={() => setActiveProjectID(null)} onUpdateProject={handleUpdateProject} onDeleteProject={handleDeleteProject}/>
       ) : (
         <BrainDumpZone onSubmitIdea={async (rawInput) => { await null; }} isLoading={false} loadingProgressBar='' />
       )}
-      
+      </main>
       
     </div> 
   )

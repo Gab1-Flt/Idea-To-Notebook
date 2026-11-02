@@ -128,7 +128,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                             </div>
                         </div>
 
-                        {/*Projevct List*/}
+                        {/*Project List*/}
                         <div>
                             {filteredProjects.length === 0 ? (
                                 <div className='mt-50 space-y-3'>
@@ -164,8 +164,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                                                     e.stopPropagation();
                                                     onToggleFavorite(project.id);
                                                 }}
-                                                className={`rounded-full hover:bg-neutral-100 transition-colors 
-                                                    ${project.isFavorite? 'opacity-100' : 'opacity-0 group-hover: opacity-100'}`}
+                                                className={`p-0.5 rounded-full hover:bg-neutral-100 transition-colors cursor-pointer
+                                                    ${project.isFavorite? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                                                 >
                                                     <Star className={`w-3.5 h-3.5 
                                                     ${project.isFavorite ? 'fill-amber-500 text-amber-500' : 'text-neutral-300 hover:text-neutral-500'}`}
