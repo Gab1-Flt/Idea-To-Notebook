@@ -1,255 +1,205 @@
 <div align="center">
 
-# 🧠 BrainOut (Notebook)
+# BrainOut — Notebook
 
-### *Your AI-Assisted "Second Brain" & Virtual Product Manager*
+**A "second brain" web application that transforms unstructured dictated or written thoughts into a structured, AI-assisted project notebook.**
 
-**Transform unstructured dictated or written thoughts into a structured, actionable project notebook in under 15 seconds.**
+<br />
 
-[![Status](https://img.shields.io/badge/Status-In%20Progress%20🚧-amber?style=for-the-badge)](https://github.com/)
-[![React](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
+[![React](https://img.shields.io/badge/React-v19.2+-61DAFB?style=flat&logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-v6.0+-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.3+-06B6D4?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-v8.3+-646CFF?style=flat&logo=vite&logoColor=white)](https://vite.dev/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-v14.0+-0055FF?style=flat&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Gemini API](https://img.shields.io/badge/Gemini_API-1.5_Flash-8E75B2?style=flat&logo=googlegemini&logoColor=white)](https://ai.google.dev/)
+[![Status](https://img.shields.io/badge/Status-In%20Progress-d97706?style=flat)]()
 
 </div>
 
----
+<br />
 
-## 💡 Motivation & Vision
+## Overview & Motivation
 
-Beaucoup de créateurs, développeurs et entrepreneurs ont des idées innovantes mais manquent de cadre pour les structurer, ce qui mène souvent à des projets abandonnés. Les outils de prise de notes classiques demandent un effort d'organisation manuel important devant une page blanche.
+Many individuals have innovative ideas but lack the framework to structure them, often leading to abandoned projects. Existing note-taking alternatives require significant manual organization in front of a blank page.
 
-**BrainOut (`Notebook`)** résout ce problème en agissant comme un **Product Manager virtuel** :
-- Au lieu de vous laisser concevoir seul l'architecture de votre pensée, l'IA analyse votre idée brute ("brain dump" écrit ou dicté à la voix).
-- En **moins de 15 secondes**, elle génère un cahier de projet modulaire comprenant : une esquisse visuelle, un plan d'action MVP, les compétences à acquérir, les pièges à éviter et des questions de réflexion stratégique pour couvrir vos angles morts.
+**BrainOut (`Notebook`)** solves this by acting as a **virtual product manager**. Instead of leaving the user to design their thought architecture alone, the application analyzes a raw, unstructured prompt—written or dictated via voice—and automatically generates a modular project notebook containing an visual architectural sketch, an actionable MVP plan, core technical concepts to learn, strategic framing questions, and common pitfalls to avoid.
 
----
-
-## 📊 Statut du Projet & Feuille de Route (Roadmap)
-
-> **Statut global :** 🚧 **En cours de développement (Phase 3 / Prototype Frontend & Intégration IA)**
-
-| Phase | Jalon (Milestone) | Livrables clés | Durée estimée | Statut |
-| :--- | :--- | :--- | :---: | :---: |
-| **Phase 1** | **Design & TRD** | Finalisation des contrats JSON de l'IA et de l'architecture système | Semaine 1 *(4j)* | ✅ **Terminé** |
-| **Phase 2** | **Client Interface (UI/UX)** | Interface React + Tailwind CSS, capture texte & dictée vocale, 5 onglets | Semaines 3-4 *(12j)* | ✅ **Terminé** |
-| **Phase 3** | **AI Pipeline (Client & Fallback)** | Intégration directe LLM (Gemini API) + moteur heuristique hors-ligne | Semaine 5 *(5j)* | 🚧 **En cours** |
-| **Phase 4** | **Backend & Infrastructure** | Serveur Node.js, base de données PostgreSQL & agent Python/LangChain | Semaine 2 & 5 *(10j)* | ⏳ **À venir** |
-| **Phase 5** | **Tests & Déploiement** | Tests d'intégration de bout en bout et mise en production finale | Semaine 6 *(4j)* | ⏳ **À venir** |
-
-### Détail d'avancement des fonctionnalités
-
-- [x] **1. Raw Thought Ingestion** : Saisie de texte libre et dictée vocale en temps réel (`Web Speech API`).
-- [x] **2. Smart Notebook Generation** : Conversion automatique en document modulaire (étapes MVP, blocs clés, compétences, pièges).
-- [x] **3. Interactive Reflection (Mentor)** : Questions ciblées générées par l'IA avec sauvegarde des réponses utilisateur pour affiner le projet.
-- [x] **4. Minimalist Editing Interface** : Espace de travail épuré avec vue *Sketch* (style carnet d'architecte), checklists interactives, export Markdown/JSON et mode favoris.
-- [x] **5. Dual AI Engine** : Connexion à l'API Google Gemini (`gemini-1.5-flash`) + moteur d'incubation local 100 % hors-ligne.
-- [ ] **6. Backend & Persistance Cloud** : Migration du `localStorage` vers Node.js + PostgreSQL (profils utilisateurs et synchronisation multi-appareils).
-- [ ] **7. Pipeline Agentique Avancé** : Microservice Python + LangChain dédié à l'extraction sémantique et la validation stricte des schémas JSON.
+<br />
 
 ---
 
-## ✨ Fonctionnalités Clés
+<br />
 
-### 🎙️ 1. Capture d'Idées ("Brain Dump" & Voice-to-Text)
-- **Dictée vocale native** : Parlez librement, vos pensées sont transcrites en direct avec retour visuel.
-- **Exemples de démarrage** : Testez l'application en un clic grâce aux idées pré-configurées.
-- **Raccourcis rapides** : `Cmd/Ctrl + K` pour créer une nouvelle note à tout moment, `Cmd/Ctrl + Enter` pour lancer l'analyse.
+## Project Status
 
-### 📓 2. Carnet de Projet Modulaire en 5 Onglets
-Chaque idée génère un espace de travail structuré autour de **5 vues complémentaires** :
-1. **Sketch (Esquisse Visuelle)** : Mise en page inspirée d'un carnet de conception (jalons datés, blocs de travail numérotés, checklist de fonctionnalités et synthèse éditoriale). Permet aussi de **réévaluer et enrichir** le projet avec l'IA en ajoutant de nouveaux détails.
-2. **Notebook (Plan d'Action MVP)** : Liste d'étapes concrètes à cocher avec barre de progression dynamique (et animation de confettis à 100 % 🎉) + les 3 piliers techniques du produit (*Core Blocks*).
-3. **Mentor (Réflexion Interactive)** : L'IA agit comme un mentor produit en posant 3 questions critiques pour challenger votre idée et lever les zones d'ombre.
-4. **Traps & Prerequisites** : Liste des compétences techniques à apprendre (*Skills to Learn*) et des erreurs classiques à éviter (*Traps to Avoid* : over-engineering, dispersion, etc.).
-5. **Original Raw Idea** : Archive intacte de votre pensée brute initiale.
+The project is currently **in active development**. Core interface components and data models are completed, while the main application state orchestration, AI service integration, and settings management are currently being finalized.
 
-### 💾 3. Gestion des Données & Export
-- **Persistance instantanée** : Sauvegarde automatique dans le navigateur (`localStorage`).
-- **Export Markdown** : Copiez l'intégralité de votre cahier de charges formaté en Markdown en un clic.
-- **Sauvegarde JSON** : Exportez et réimportez tous vos projets au format `.json` depuis les paramètres.
+### Completed
+
+- [x] **Data Models & Demo Dataset** (`src/types/project.ts`, `src/data/mockProjects.ts`) — Strict TypeScript interfaces for project blueprints, visual sketch layouts, and pre-loaded sample ideas.
+- [x] **Brain Dump & Voice Ingestion Zone** (`src/components/BrainDumpZone.tsx`) — Unstructured text input, real-time browser speech-to-text transcription (`Web Speech API`), live voice waveform indicators, and starter prompts.
+- [x] **Modular 5-Tab Project Workspace** (`src/components/ProjectView.tsx`) — Interactive workspace featuring the visual *Sketch* layout, *Notebook* MVP checklist with confetti feedback, *Mentor* Q&A reflection inputs, *Traps & Prerequisites* view, and *One-click Markdown export*.
+- [x] **Navigation Sidebar** (`src/components/Sidebar.tsx`) — Collapsible project explorer with real-time search, favorites filtering, and MVP progress badges.
+
+### In Progress / Upcoming
+
+- [ ] **AI Structuring Engine** (`src/services/aiService.ts`) — Direct client-side integration with the Google Gemini API (`gemini-1.5-flash` with JSON response mode) paired with an offline heuristic fallback engine.
+- [ ] **Settings & Data Portability Modal** (`src/components/SettingsModal.tsx`) — Interface for managing the user's Gemini API key and exporting/importing project backups as JSON files.
+- [ ] **Core Application State & Persistence** (`src/App.tsx`) — Global state orchestration, automatic `localStorage` synchronization, and global keyboard shortcuts (`Cmd/Ctrl + K`).
+
+<br />
 
 ---
 
-## 🏗️ Architecture du Système
+<br />
 
-### Architecture Actuelle (Client-Side & Direct AI)
-L'application fonctionne actuellement de manière autonome côté client (SPA React) avec persistance locale et appel direct à l'API LLM ou au moteur de secours hors-ligne :
+## Key Features
+
+### 1. Raw Thought Ingestion (Voice & Text)
+Capture ideas on the fly without worrying about formatting. Built on the native browser `SpeechRecognition` / `webkitSpeechRecognition` API, the interface transcribes spoken thoughts in real time with interim transcript previews, or accepts raw written brain dumps.
+
+### 2. Modular 5-Tab Project Notebook
+Every structured idea is organized into five focused views inside `ProjectView`:
+- **Sketch** — A visual blueprint inspired by an architect's notebook (milestones, numbered core work blocks, feature checklists, and editorial summary), complete with an interactive input to enrich and re-evaluate the project with additional thoughts.
+- **Notebook** — An actionable MVP checklist with a dynamic progress bar, interactive step completion (celebrated with `canvas-confetti`), and core architectural blocks.
+- **Mentor** — Targeted strategic framing questions where users can write and save their own answers to address conceptual blind spots.
+- **Traps & Prerequisites** — A curated list of technical skills to acquire (*Skills to Learn*) and common product mistakes to avoid (*Traps to Avoid*).
+- **Original Raw Idea** — Preserves the initial unstructured prompt for reference, alongside a one-click **Copy as Markdown** exporter.
+
+### 3. Dual Incubation Engine (Gemini API + Offline Fallback)
+Designed in TypeScript to run directly in the browser with sub-15-second generation times:
+- **Live Gemini Mode** — Calls the `gemini-1.5-flash` REST endpoint with `responseMimeType: "application/json"` to transform raw text into a structured `ProjectIdea` object.
+- **Local Heuristic Engine** — If no API key is configured or the user is offline, a built-in local incubator analyzes keywords (SaaS, Mobile, Audio/Voice, AI) to generate a complete project structure seamlessly.
+
+<br />
+
+---
+
+<br />
+
+## System Architecture
+
+The application is built as a client-side Single Page Application (SPA) in React and TypeScript, communicating directly with browser APIs and the Google Gemini REST API.
 
 ```mermaid
 flowchart LR
-    User(["👤 Utilisateur\n(Voix / Texte brut)"]) --> UI["💻 Frontend React + Tailwind\n(BrainDumpZone)"]
-    UI -->|Web Speech API| Transcript["🎙️ Transcription Live"]
-    Transcript --> Engine{"🔑 Clé API\nconfigurée ?"}
-    UI --> Engine
-    Engine -->|Oui| Gemini["✨ Google Gemini API\n(gemini-1.5-flash)"]
-    Engine -->|Non / Hors-ligne| Local["⚙️ Moteur d'Incubation Local\n(Analyse heuristique)"]
-    Gemini -->|JSON Structuré < 15s| View["📓 ProjectView\n(5 Onglets interactifs)"]
-    Local -->|JSON Structuré| View
-    View <--> Storage[("🗄️ LocalStorage\n& Export JSON/MD")]
+    subgraph Browser ["Client Browser (React 19 + TypeScript)"]
+        direction TB
+        Input["BrainDumpZone\n(Text & Web Speech API)"]
+        AppState["App State Controller\n(App.tsx)"]
+        SidebarUI["Sidebar\n(Search, Filter & Navigation)"]
+        Workspace["ProjectView\n(Sketch, Notebook, Mentor, Traps, Raw)"]
+        SettingsUI["SettingsModal\n(API Key & JSON Backup)"]
+        AIService["AI Incubation Service\n(aiService.ts)"]
+        LocalEngine["Local Heuristic Incubator\n(Offline Fallback)"]
+        Storage[("Browser LocalStorage\n(Projects & API Key)")]
+    end
+
+    subgraph External ["External Cloud API"]
+        Gemini["Google Gemini API\n(gemini-1.5-flash)"]
+    end
+
+    Input -->|Raw Text / Transcript| AppState
+    SidebarUI <-->|Select / Filter Project| AppState
+    SettingsUI <-->|Configure Key & Export| AppState
+    AppState -->|Process Idea| AIService
+    AIService -->|HTTPS POST JSON| Gemini
+    AIService -->|Fallback if no key| LocalEngine
+    Gemini -->|Structured ProjectIdea| AppState
+    LocalEngine -->|Structured ProjectIdea| AppState
+    AppState -->|Render Active Project| Workspace
+    AppState <-->|Persist State| Storage
 ```
 
-### Architecture Cible Complète (PRD / TRD)
-Conformément au *Technical Requirements Document (TRD)*, l'architecture cible complète intègre un backend dédié et un pipeline agentique :
-
-```mermaid
-flowchart TB
-    subgraph Client ["Client (Frontend)"]
-        ReactUI["React 19 + Tailwind CSS\n• Capture Audio/Texte\n• Affichage Notebook Interactif"]
-    end
-
-    subgraph Backend ["Backend (API Gateway)"]
-        Node["Node.js\n• Gestion de sessions\n• Routage des requêtes\n• Flux Audio / Fichiers"]
-    end
-
-    subgraph AIEngine ["AI Processing Engine"]
-        Python["Python + LangChain\n• Pipeline Agentique\n• Extraction Sémantique\n• Validation JSON"]
-    end
-
-    subgraph External ["External APIs"]
-        LLM["LLM API (Gemini / DeepSeek / OpenAI)\n• Analyse de texte"]
-        STT["Speech-to-Text API\n• Transcription Audio"]
-    end
-
-    subgraph DB ["Database"]
-        Postgres[("PostgreSQL\n• Profils Utilisateurs\n• Notebooks Structurés")]
-    end
-
-    ReactUI -->|Envoie Texte brut / Audio| Node
-    Node -->|Requête de transcription| STT
-    Node -->|Transmet le payload texte| Python
-    Python <-->|Prompt & JSON Structuré| LLM
-    Node -->|Sauvegarde les données| Postgres
-    Node -->|Retourne le Notebook final| ReactUI
-```
+<br />
 
 ---
 
-## 📄 Contrat de Données (JSON Blueprint)
+<br />
 
-Le cœur de l'application repose sur la transformation d'une chaîne de caractères non structurée en un objet JSON strict contenant les 4 piliers d'analyse (étapes, concepts, pièges, réflexions) :
+## Tech Stack
 
-```json
-{
-  "metadata": {
-    "status": "completed",
-    "analyzed_modality": "voice_or_text",
-    "confidence_score": 0.95
-  },
-  "project_blueprint": {
-    "title": "Clear short title (max 6 words)",
-    "one_liner": "One sentence summary of core value",
-    "key_steps": [
-      {
-        "step_order": 1,
-        "title": "Define minimal core requirement",
-        "description": "Concrete step 1",
-        "status": "pending"
-      }
-    ],
-    "learning_concepts": [
-      {
-        "concept_name": "Skill to acquire",
-        "context": "Technical prerequisite for the MVP"
-      }
-    ],
-    "pitfalls_to_avoid": [
-      {
-        "pitfall": "Over-engineering custom infrastructure prematurely",
-        "mitigation": "Focus all efforts on solving the primary problem cleanly"
-      }
-    ],
-    "reflection_questions": [
-      "What is the single essential feature required for launch?",
-      "How will you validate demand with 5 users this week?"
-    ]
-  }
-}
-```
+- **Frontend Framework:** [React 19](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool:** [Vite 8](https://vite.dev/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations & Micro-interactions:** [Framer Motion](https://www.framer.com/motion/) & [canvas-confetti](https://github.com/catdad/canvas-confetti)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **AI & Speech:** [Google Gemini API (`gemini-1.5-flash`)](https://ai.google.dev/) & Browser `Web Speech API`
+- **Linting:** [Oxlint](https://oxc.rs/)
+
+<br />
 
 ---
 
-## 🛠️ Stack Technique
+<br />
 
-| Couche | Technologies actuelles (v0.4) | Cible TRD (Full-Stack) |
-| :--- | :--- | :--- |
-| **Frontend** | React 19, TypeScript, Vite 8, Tailwind CSS v4 | React + Tailwind CSS |
-| **Animations & UI** | Framer Motion, Lucide React, Canvas Confetti | — |
-| **IA & LLM** | Google Gemini (`gemini-1.5-flash`) + Moteur Local | Python, LangChain, LLM APIs |
-| **Reconnaissance Vocale** | `Web Speech API` native du navigateur | Speech-to-Text API dédiée |
-| **Backend & Base de données** | `localStorage` + Import/Export JSON | Node.js + PostgreSQL |
-| **Qualité de code** | Oxlint + TypeScript strict | Tests E2E & CI/CD |
+## Getting Started
 
----
+### Prerequisites
 
-## 🚀 Installation & Démarrage Rapide
+- **Node.js** (v18+ recommended)
+- **npm** (or `pnpm` / `yarn`)
 
-### Prérequis
-- **Node.js** (version 18 ou supérieure)
-- **npm** (ou `pnpm` / `yarn`)
-
-### 1. Cloner le dépôt et installer les dépendances
+### Installation
 
 ```bash
-git clone <url-du-repo>
+# 1. Clone the repository
+git clone <repository-url>
 cd Notebook
+
+# 2. Install dependencies
 npm install
-```
 
-### 2. Lancer le serveur de développement
-
-```bash
+# 3. Start the development server
 npm run dev
 ```
-L'application sera accessible sur `http://localhost:5173`.
 
-### 3. Commandes utiles
+Open `http://localhost:5173` in your browser to view the application.
+
+### Available Scripts
 
 ```bash
-npm run build     # Compiler TypeScript et générer le build de production
-npm run preview   # Prévisualiser le build de production en local
-npm run lint      # Vérifier la qualité du code avec Oxlint
+npm run dev       # Launch Vite development server with HMR
+npm run build     # Type-check with TypeScript and build for production
+npm run preview   # Locally preview the production build
+npm run lint      # Run Oxlint static analysis
 ```
 
----
-
-## 🔑 Configuration de l'IA (Optionnel)
-
-L'application fonctionne **immédiatement sans configuration** grâce à son moteur d'incubation local intégré. Pour activer l'analyse générative par IA :
-
-1. Obtenez une clé API gratuite sur [Google AI Studio](https://aistudio.google.com/app/apikey).
-2. Ouvrez l'application et cliquez sur **Settings** (icône d'engrenage en bas de la barre latérale).
-3. Saisissez votre clé API (`AIzaSy...`) et cliquez sur **Save**.
-4. *Note de confidentialité : Votre clé est enregistrée uniquement en local dans votre navigateur (`localStorage`) et n'est partagée avec aucun serveur tiers autre que l'API officielle de Google.*
+<br />
 
 ---
 
-## 📂 Structure du Projet
+<br />
+
+## Project Structure
 
 ```text
 Notebook/
 ├── src/
 │   ├── components/
-│   │   ├── BrainDumpZone.tsx   # Zone de saisie libre, dictée vocale & exemples
-│   │   ├── ProjectView.tsx     # Vue projet en 5 onglets, checklists & export Markdown
-│   │   ├── SettingsModal.tsx   # Configuration clé API Gemini & sauvegarde JSON
-│   │   └── Sidebar.tsx         # Navigation latérale, recherche & favoris
+│   │   ├── BrainDumpZone.tsx   # Voice dictation & unstructured text input view
+│   │   ├── ProjectView.tsx     # 5-tab project workspace & Markdown export
+│   │   ├── Sidebar.tsx         # Collapsible navigation, search & favorites
+│   │   └── SettingsModal.tsx   # [In Progress] API key config & JSON import/export
 │   ├── data/
-│   │   └── mockProjects.ts     # Projets de démonstration pré-chargés
+│   │   └── mockProjects.ts     # Initial sample projects for immediate testing
 │   ├── services/
-│   │   └── aiService.ts        # Appel API Gemini + moteur d'incubation local (fallback)
+│   │   └── aiService.ts        # [In Progress] Gemini 1.5 Flash client & local fallback
 │   ├── types/
-│   │   └── project.ts          # Interfaces TypeScript (ProjectIdea, NotebookSketchData...)
-│   ├── App.tsx                 # État principal, persistance localStorage & raccourcis
-│   └── main.tsx                # Point d'entrée de l'application React
+│   │   └── project.ts          # Core TypeScript interfaces (ProjectIdea, TabType, etc.)
+│   ├── App.tsx                 # [In Progress] State management & localStorage sync
+│   └── main.tsx                # Application entry point
 ├── package.json
 ├── tailwind.config.js
 └── vite.config.ts
 ```
 
+<br />
+
 ---
 
-## 👤 Auteur
+<br />
 
-- **Gabin Flotat** — *Conception produit (PRD/TRD), Architecture & Développement Full-Stack*
+## Author
+
+**Gabin Flotat** — *Product Design, Architecture & Frontend Engineering*
