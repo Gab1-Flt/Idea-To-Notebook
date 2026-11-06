@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { type TabType, type ProjectIdea } from "../types/project"
 import { AnimatePresence, motion } from 'framer-motion';
-import { AlertTriangle, ArrowLeft, BookOpen, Check, Compass, Copy, Feather, FileText, GraduationCap, ShieldAlert, Star, Trash2 } from "lucide-react";
+import { AlertTriangle, ArrowLeft, BookOpen, Check, CheckCircle2, Circle, Compass, Copy, Feather, FileText, GraduationCap, ShieldAlert, Star, Trash2 } from "lucide-react";
 import { buildNotebookSketchData } from "../services/aiService";
 
 
@@ -21,6 +21,9 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
     const [activeTab, setActiveTab] = useState<TabType>('Sketch');
     const [copied, setCopied] = useState(false);
     const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
+    const [editingAnswers, setEditingAnswers] = useState<Record<string, string>>(
+        project.mentorAnswers || {}
+    );
 
     useEffect(() => {
         setActiveTab('Sketch');
@@ -71,6 +74,33 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
     const completedStepsCount = project.completedSteps?.length || 0;
     const totalStepsCount = project.mvp.mvpSteps.length;
     const progressPercentage = totalStepsCount > 0 ? Math.round((completedStepsCount / totalStepsCount) * 100) : 0;
+
+    const handleToggleStep = (stepText: string) => {
+        const currentCompleted = project.completedSteps || [];
+        let updated: string[];
+
+        if (currentCompleted.includes(stepText)) {
+            updated = currentCompleted.filter((s) => s !== stepText);
+        } else {
+            updated = [...currentCompleted, stepText];
+        }
+
+        onUpdateProject({
+        ...project,
+        completedSteps: updated,
+        updatedAt: new Date().toISOString()
+        });
+    };
+
+    const handleSaveMentorAnswer = (index: number, answer: string) => {
+        const newAnswers = { ...editingAnswers, [index.toString()]: answer };
+        setEditingAnswers(newAnswers);
+        onUpdateProject({
+            ...project,
+            mentorAnswers: newAnswers,
+            updatedAt: new Date().toISOString()
+        });
+    };
 
     const sketchData = buildNotebookSketchData(project);
     
@@ -211,22 +241,22 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                     <div className="flex flex-col items-start justify-between gap-4 pt-2">
                                         <div className="space-y-1 flex-1">
                                             <h1 className="font-extrabold text-3xl md:text-5xl text-neutral-900 tracking-wider uppercase font-hand leading-none">
-                                                {/*sketchData.dateTitle*/}
+                                                {sketchData.dateTitle}
                                             </h1>
                                             <p className="font-bold text-xs md:text-sm text-neutral-600 tracking-widest uppercase font-hand">
-                                                {/*sketchData.subTitle*/}
+                                                {sketchData.subTitle}
                                             </p>
                                         </div>
 
                                         {/* Date Stamp Badge Box */}
                                         <div className="flex items-center gap-2.5 font-sans border border-rose-200 bg-rose-50/40 rounded-2xl p-2 shrink-0">
                                             <div className="border border-rose-400 rounded-xl px-3 py-1 text-center bg-white shadow-xs">
-                                                <span className="block font-black text-xl leading-none text-neutral-900 font-mono">{/*sketchData.dayStamp*/}</span>
-                                                <span className="block text-[9px] font-black text-rose-600 tracking-widest font-mono uppercase mt-0.5">{/*sketchData.monthStamp*/}</span>
+                                                <span className="block font-black text-xl leading-none text-neutral-900 font-mono">{sketchData.dayStamp}</span>
+                                                <span className="block text-[9px] font-black text-rose-600 tracking-widest font-mono uppercase mt-0.5">{sketchData.monthStamp}</span>
                                             </div>
                                             <div className="text-[10px] space-y-0.5 font-hand">
                                                 <span className="font-bold text-rose-600 flex items-center gap-1">
-                                                ★ {/*sketchData.versionBadge*/}
+                                                ★ {sketchData.versionBadge}
                                                 </span>
                                                 <span className="block text-neutral-500 font-medium">
                                                 Active Synthesis
@@ -235,25 +265,25 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                         </div>
 
                                         {/* SECTION 1: KEY MILESTONES & TARGETS */}
-                                        <div className="flex space-y-3 pt-2">
+                                        <div className="flex flex-col space-y-3 pt-2">
                                             <div className="text-rose-600 font-hand font-extrabold text-sm tracking-widest uppercase flex items-center gap-1">
                                             <span>✱ KEY MILESTONES & TARGETS ✱</span>
                                             </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 font-hand text-xs md:text-sm font-bold text-neutral-800">
-                                            {/*sketchData.milestones.map((m, idx) => (
+                                            {sketchData.mileStones.map((m, idx) => (
                                                 <div key={idx} className="flex items-center gap-2">
-                                                <span className="font-mono text-sm text-neutral-900 font-black">{m.dateNum}</span>
+                                                <span className="font-mono text-sm text-neutral-900 font-black">{m.date}</span>
                                                 <span className="text-neutral-900 font-extrabold">➔</span>
-                                                <span className="tracking-tight">{m.label}</span>
+                                                <span className="tracking-tight">{m.text}</span>
                                                 </div>
-                                            ))*/}
+                                            ))}
                                             </div>
                                         </div>
 
                                         {/* Quote Box Card */}
                                         <div className="my-6 p-4 md:p-5 rounded-2xl bg-white border border-neutral-200 shadow-subtle border-l-4 border-l-neutral-900 font-hand text-sm md:text-base font-medium italic text-neutral-800 leading-relaxed">
-                                            "{/*sketchData.quote*/}"
+                                            "{sketchData.quote}"
                                         </div>
 
                                         {/* SECTION 2: WORK PROJECTS */}
@@ -264,16 +294,16 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                             </div>
 
                                             <div className="space-y-3 font-hand">
-                                            {/*sketchData.workProjects.map((wp, idx) => (
+                                            {sketchData.workProjects.map((wp, idx) => (
                                                 <div key={idx} className="flex items-start gap-2.5 text-xs md:text-sm leading-relaxed">
-                                                <span className="font-bold text-sky-700 text-sm shrink-0 mt-0.5">{wp.numSymbol}</span>
+                                                <span className="font-bold text-sky-700 text-sm shrink-0 mt-0.5">{wp.num}</span>
                                                 <div>
                                                     <strong className="font-bold text-neutral-900 uppercase tracking-tight">{wp.title}</strong>
                                                     <span className="text-neutral-400 mx-1.5">—</span>
                                                     <span className="font-medium text-neutral-700">{wp.desc}</span>
                                                 </div>
                                                 </div>
-                                            ))*/}
+                                            ))}
                                             </div>
                                         </div>
                                         
@@ -286,16 +316,16 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                             </div>
 
                                             <div className="space-y-2 font-hand text-xs md:text-sm">
-                                            {/*sketchData.keyFeatures.map((kf, idx) => (
+                                            {sketchData.keyFeatures.map((kf, idx) => (
                                                 <div key={idx} className="flex items-center justify-between pb-1.5 border-b border-dashed border-neutral-200/90">
-                                                <span className="font-bold text-neutral-800 tracking-tight">{kf.title}</span>
+                                                <span className="font-bold text-neutral-800 tracking-tight">{kf.text}</span>
                                                 <div className="flex items-center gap-1.5 font-mono text-emerald-700">
-                                                    {Array.from({ length: kf.boxesCount }).map((_, i) => (
+                                                    {/*Array.from({ length: kf.boxesCount }).map((_, i) => (
                                                     <span key={i} className="inline-block w-3.5 h-3.5 border border-emerald-600 rounded-xs"></span>
-                                                    ))}
+                                                    ))*/}
                                                 </div>
                                                 </div>
-                                            ))*/}
+                                            ))}
                                             </div>
                                         </div>
 
@@ -307,16 +337,16 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                             </div>
 
                                             <div className="space-y-2 font-hand text-xs md:text-sm">
-                                            {/*sketchData.devActions.map((da, idx) => (
+                                            {sketchData.devArchi.map((da, idx) => (
                                                 <div key={idx} className="flex items-center justify-between pb-1.5 border-b border-dashed border-neutral-200/90">
-                                                <span className="font-bold text-neutral-800 tracking-tight">{da.title}</span>
+                                                <span className="font-bold text-neutral-800 tracking-tight">{da.text}</span>
                                                 <div className="flex items-center gap-1.5 font-mono text-rose-500">
-                                                    {Array.from({ length: da.boxesCount }).map((_, i) => (
+                                                    {/*Array.from({ length: da.boxesCount }).map((_, i) => (
                                                     <span key={i} className="inline-block w-3.5 h-3.5 border border-rose-400 rounded-xs"></span>
-                                                    ))}
+                                                    ))*/}
                                                 </div>
                                                 </div>
-                                            ))*/}
+                                            ))}
                                             </div>
                                         </div>
                                     </div>
@@ -347,7 +377,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                     </div>
 
                                     <div className="space-y-2.5">
-                                        {/*project.notebook.mvpSteps.map((step, idx) => {
+                                        {project.mvp.mvpSteps.map((step, idx) => {
                                         const isDone = project.completedSteps?.includes(step);
                                         return (
                                             <div
@@ -372,29 +402,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                             </div>
                                             </div>
                                         );
-                                        })*/}
-                                    </div>
-                                </div>
-
-                                <div className="space-y-3">
-                                    <h3 className="text-xs font-semibold text-neutral-500 uppercase tracking-wider px-1">
-                                        Core Blocks
-                                    </h3>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        {/*project.notebook.coreBlocks.map((block, i) => (
-                                            <div
-                                                key={i}
-                                                className="paper-card rounded-2xl p-5 space-y-1.5"
-                                            >
-                                                <h4 className="font-bold text-xs md:text-sm text-neutral-900">
-                                                {block.title}
-                                                </h4>
-                                                <p className="text-xs text-neutral-500 leading-relaxed font-normal">
-                                                {block.desc}
-                                                </p>
-                                            </div>
-                                        ))*/}
+                                        })}
                                     </div>
                                 </div>
                             </div>
@@ -409,7 +417,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                 </h3>
 
                                 <div className="space-y-4">
-                                    {/*project.mentor.keyQuestions.map((q, idx) => {
+                                    {project.mentor.questions.map((q, idx) => {
                                         const answer = editingAnswers[idx.toString()] || '';
 
                                         return (
@@ -419,10 +427,10 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                             >
                                                 <div className="flex items-start gap-2.5">
                                                     <span className="w-6 h-6 rounded-full bg-neutral-100 text-neutral-700 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
-                                                    Q{idx + 1}
+                                                        Q{idx + 1}
                                                     </span>
                                                     <h4 className="text-xs md:text-sm font-normal text-neutral-900 leading-snug">
-                                                    {q}
+                                                        {q}
                                                     </h4>
                                                 </div>
 
@@ -436,7 +444,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                                 </div>
                                             </div>
                                         );
-                                    })*/}
+                                    })}
                                 </div>
                             </div>
                         </div>
@@ -454,14 +462,14 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                     </div>
 
                                     <ul className="space-y-2.5">
-                                        {/*project.roadmap.skillsToLearn.map((skill, idx) => (
+                                        {project.traps.skillsToLearn.map((skill, idx) => (
                                             <li key={idx} className="flex items-start gap-2.5 text-xs md:text-sm text-neutral-700 font-normal leading-relaxed">
                                                 <span className="w-5 h-5 rounded-full bg-neutral-100 text-neutral-700 font-mono text-[11px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
                                                 {idx + 1}
                                                 </span>
                                                 <span>{skill}</span>
                                             </li>
-                                        ))*/}
+                                        ))}
                                     </ul>
                                 </div>
 
@@ -474,14 +482,14 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                     </div>
 
                                     <ul className="space-y-2.5">
-                                        {/*project.roadmap.trapsToAvoid.map((trap, idx) => (
+                                        {project.traps.trapsToAvoid.map((trap, idx) => (
                                             <li key={idx} className="flex items-start gap-2.5 text-xs md:text-sm text-neutral-700 font-normal leading-relaxed">
                                                 <span className="w-5 h-5 rounded-full bg-neutral-100 text-neutral-700 font-mono text-[11px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
                                                 {idx + 1}
                                                 </span>
                                                 <span>{trap}</span>
                                             </li>
-                                        ))*/}
+                                        ))}
                                     </ul>
                                 </div>
                             </div>
