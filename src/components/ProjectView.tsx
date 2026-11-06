@@ -105,9 +105,9 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
     const sketchData = buildNotebookSketchData(project);
     
     return (
-        <div className="flex flex-1 flex-col w-full min-h-screen bg-[#f4f2ed] animate-fade-in">
+        <div className="flex flex-1 flex-col overscroll-none w-full min-h-screen bg-[#f4f2ed] animate-fade-in overflow-auto">
             {/* Top Header Bar*/}
-            <div className="bg-white/95 backdrop-blur-md border-b border-neutral-200/80 px-4 md:px-8 py-3 flex items-center justify-between sticky top-0 z-3">
+            <div className="bg-white/95 backdrop-blur-md border-b border-neutral-200/80 px-4 md:px-8 py-3 flex items-center justify-between sticky top-0 z-20">
                 <motion.button 
                     whileHover={{ scale: 1.04, x: -2 }}
                     whileTap={{ scale: 0.93 }}
@@ -172,7 +172,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
             </div>
 
             {/*Navigation Bar Tabs*/}
-            <div className="bg-white/95 backdrop-blur-md border-b border-neutral-200/80 px-4 md:px-8 py-4 flex items-center justify-center sticky top-13.25 z-20 shadow-subtle">
+            <div className="bg-white/95 backdrop-blur-md border-b border-neutral-200/80 px-4 md:px-8 py-4 flex items-center justify-center shadow-subtle sticky top-14 z-20">
                 <div className="flex items-center gap-1.5 p-1 bg-neutral-100/90 rounded-full border border-neutral-200/80 overflow-x-auto max-w-full">
                     {tabs.map((tab) => {
                         const Icon = tab.icon;

@@ -7,6 +7,7 @@ import { BrainDumpZone } from './components/BrainDumpZone';
 import { ProjectView } from './components/ProjectView';
 import { type ProjectIdea } from './types/project';
 import { SettingsModal } from './components/SettingsModal';
+import { generateProjectIdeaFromRawText } from './services/aiService';
 
 export const App: React.FC = () => {
   
@@ -69,12 +70,32 @@ export const App: React.FC = () => {
     setIsLoading(true);
     setLoadingStep("Initializing analysis...");
 
-    /*ADD AI FUNCTION HERE*/
+    try {
+      if(apiKey){
+        const newProject = await generateProjectIdeaFromRawText(
+        rawInput,
+        apiKey,
+        (step) => setLoadingStep(step)
+        );
 
-  }
+        setProjects((prev) => [newProject, ...prev]);
+        setActiveProjectID(newProject.id);
+      }
+      else {
+        setIsSettingOpen(true);
+      }
+      
+    } catch (err: any) {
+      console.error("Structuring error:", err);
+      alert(err.message || "An error occurred while structuring the idea.");
+    } finally {
+      setIsLoading(false);
+      setLoadingStep('');
+    }
+  };
 
   return (
-    <div className='min-h-screen flex'>
+    <div className='flex h-screen bg-[#fafafa] overflow-hidden text-neutral-900 font-sans selection:bg-neutral-200'>
       <Sidebar projectList={projects} isOpen={isSidebarOpen} activeProjectId={activeProjectId} onSelectProject={(id) => setActiveProjectID(id)} onDeleteProjecte={handleDeleteProject} onNewProject={()=>setActiveProjectID(null)} onOpenSettings={() => setIsSettingOpen(true)} onToggleFavorite={handleToggleFavorite} onToggleOpen={() => setIsSidebarOpen(!isSidebarOpen)}/>
       <main className="flex-1 flex flex-col overflow-y-auto relative">
         {activeProject ? (

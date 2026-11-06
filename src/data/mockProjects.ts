@@ -20,7 +20,7 @@ export const INITIAL_PROJECTS : ProjectIdea[] = [
                 },
                 {
                     date: '17',
-                    text: 'milesetone2, to complete before 17'
+                    text: 'milesetone 2, to complete before 17'
                 }
             ],
             quote: 'This a quote to describe my projet in few lines !',
@@ -52,7 +52,6 @@ export const INITIAL_PROJECTS : ProjectIdea[] = [
                     text: 'text 1'
                 }
             ] 
-
         },
         createdAt : new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
         updatedAt : new Date(Date.now() - 3600000 * 24 * 2).toISOString(),

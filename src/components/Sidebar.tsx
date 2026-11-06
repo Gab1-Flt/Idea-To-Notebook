@@ -129,7 +129,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         </div>
 
                         {/*Project List*/}
-                        <div>
+                        <div className="flex-1 overflow-y-auto space-y-1 pr-1">
                             {filteredProjects.length === 0 ? (
                                 <div className='mt-50 space-y-3'>
                                     <FileText className='w-9 h-9 text-neutral-300 mx-auto mb-2'/>
