@@ -1,12 +1,12 @@
 import type { ProjectIdea } from "../types/project";
 
 /*MockData for Project 1*/
-export const INITIAL_PROJECTS : ProjectIdea[] = [
+export const INITIAL_PROJECTS: ProjectIdea[] = [
     {
-        id : 'project-1',
-        title : 'This is a Demo Title - TITLE TITLE',
+        id: 'project-1',
+        title: 'This is a Demo Title - TITLE TITLE',
         oneLiner: 'OneLiner of the first project test',
-        rawInput : 'Fake raw input in order to simulate a fake project. This is a fake input and it is supposed to appear in the raw input section',
+        rawInput: 'Fake raw input in order to simulate a fake project. This is a fake input and it is supposed to appear in the raw input section',
         notebookSketch: {
             dateTitle: 'MONTH 2026',
             dayStamp: 'Day',
@@ -51,36 +51,36 @@ export const INITIAL_PROJECTS : ProjectIdea[] = [
                     symbol: 'symbol 1',
                     text: 'text 1'
                 }
-            ] 
+            ]
         },
-        createdAt : new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
-        updatedAt : new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
-        isFavorite : true,
-        completedSteps : [
+        createdAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
+        updatedAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
+        isFavorite: true,
+        completedSteps: [
             'This is the first step'
         ],
-        mentorAnswers : {
-            '0' : 'This is the answer to the first mentor question'
+        mentorAnswers: {
+            '0': 'This is the answer to the first mentor question'
         },
-        mvp : {
-            mvpSteps : [
+        mvp: {
+            mvpSteps: [
                 'This is the first step',
                 'This is the second step',
                 'This is the third step'
             ]
         },
-        mentor : {
-            questions : [
+        mentor: {
+            questions: [
                 'QUESTION 1 : BLABLABLA',
                 'QUESTION 2 : BLABLABLA'
             ]
         },
-        traps : {
-            skillsToLearn : [
+        traps: {
+            skillsToLearn: [
                 'First skill to learn is SKILL1',
                 'Seecond skill to lean is SKILL2'
             ],
-            trapsToAvoid : [
+            trapsToAvoid: [
                 'First trap to avoid is TRAP1',
                 'Second trap to avoid is TRAP2'
             ]

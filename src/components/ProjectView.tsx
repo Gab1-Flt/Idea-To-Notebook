@@ -32,7 +32,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
 
     const handleToggleFavorite = () => {
         onUpdateProject({
-            ...project, 
+            ...project,
             isFavorite: !project.isFavorite
         })
     }
@@ -64,11 +64,11 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
     };
 
     const tabs = [
-    { id: 'Sketch', label: 'Sketch', icon: Feather },
-    { id: 'MVP', label: 'MVP', icon: BookOpen },
-    { id: 'Mentor', label: 'Mentor', icon: Compass },
-    { id: 'Traps', label: 'Traps & Prerequisites', icon: ShieldAlert },
-    { id: 'Raw', label: 'Original Raw Idea', icon: FileText },
+        { id: 'Sketch', label: 'Sketch', icon: Feather },
+        { id: 'MVP', label: 'MVP', icon: BookOpen },
+        { id: 'Mentor', label: 'Mentor', icon: Compass },
+        { id: 'Traps', label: 'Traps & Prerequisites', icon: ShieldAlert },
+        { id: 'Raw', label: 'Original Raw Idea', icon: FileText },
     ];
 
     const completedStepsCount = project.completedSteps?.length || 0;
@@ -86,9 +86,9 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
         }
 
         onUpdateProject({
-        ...project,
-        completedSteps: updated,
-        updatedAt: new Date().toISOString()
+            ...project,
+            completedSteps: updated,
+            updatedAt: new Date().toISOString()
         });
     };
 
@@ -103,36 +103,36 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
     };
 
     const sketchData = buildNotebookSketchData(project);
-    
+
     return (
         <div className="flex flex-1 flex-col overscroll-none w-full min-h-screen bg-[#f4f2ed] animate-fade-in overflow-auto">
             {/* Top Header Bar*/}
             <div className="bg-white/95 backdrop-blur-md border-b border-neutral-200/80 px-4 md:px-8 py-3 flex items-center justify-between sticky top-0 z-20">
-                <motion.button 
+                <motion.button
                     whileHover={{ scale: 1.04, x: -2 }}
                     whileTap={{ scale: 0.93 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                     onClick={onBackToHome}
                     className="inline-flex items-center gap-2 text-xs font-semibold text-neutral-600 hover:text-neutral-900 transition-colors focus-ring px-10 py-1.5 rounded-full hover:bg-neutral-100 cursor-pointer"
-                    >
+                >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     <span>New note</span>
                 </motion.button>
 
-            
+
 
                 {/*Action buttons right*/}
                 <div className="flex items-center gap-2">
                     <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.75, rotate: 18 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    onClick={handleToggleFavorite}
-                    className={`p-2 rounded-full border transition-all cursor-pointer ${project.isFavorite
-                        ? 'bg-amber-50 border-amber-200 text-amber-600'
-                        : 'bg-white border-neutral-200/80 text-neutral-400 hover:text-neutral-700'
-                        }`}
-                    title={project.isFavorite ? "Favorite" : "Add to favorites"}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.75, rotate: 18 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                        onClick={handleToggleFavorite}
+                        className={`p-2 rounded-full border transition-all cursor-pointer ${project.isFavorite
+                            ? 'bg-amber-50 border-amber-200 text-amber-600'
+                            : 'bg-white border-neutral-200/80 text-neutral-400 hover:text-neutral-700'
+                            }`}
+                        title={project.isFavorite ? "Favorite" : "Add to favorites"}
                     >
                         <Star className={`w-3.5 h-3.5 ${project.isFavorite ? 'fill-amber-400 text-amber-500' : ''}`} />
                     </motion.button>
@@ -150,22 +150,22 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
 
                     {isConfirmingDelete ? (
                         <motion.button
-                        whileTap={{ scale: 0.92 }}
-                        onClick={() => onDeleteProject(project.id)}
-                        onMouseLeave={() => setIsConfirmingDelete(false)}
-                        className="px-3 py-1.5 bg-rose-50 border border-rose-200 rounded-full text-xs font-semibold text-rose-700 hover:bg-rose-100 transition-colors cursor-pointer"
+                            whileTap={{ scale: 0.92 }}
+                            onClick={() => onDeleteProject(project.id)}
+                            onMouseLeave={() => setIsConfirmingDelete(false)}
+                            className="px-3 py-1.5 bg-rose-50 border border-rose-200 rounded-full text-xs font-semibold text-rose-700 hover:bg-rose-100 transition-colors cursor-pointer"
                         >
-                        Confirm?
+                            Confirm?
                         </motion.button>
                     ) : (
                         <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.88 }}
-                        onClick={() => setIsConfirmingDelete(true)}
-                        className="p-2 rounded-full bg-white border border-neutral-200/80 text-neutral-400 hover:text-rose-600 transition-colors cursor-pointer"
-                        title="Delete"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.88 }}
+                            onClick={() => setIsConfirmingDelete(true)}
+                            className="p-2 rounded-full bg-white border border-neutral-200/80 text-neutral-400 hover:text-rose-600 transition-colors cursor-pointer"
+                            title="Delete"
                         >
-                        <Trash2 className="w-3.5 h-3.5" />
+                            <Trash2 className="w-3.5 h-3.5" />
                         </motion.button>
                     )}
                 </div>
@@ -179,18 +179,18 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                         const isActive = activeTab === tab.id;
                         return (
                             <button
-                            key={tab.id}
-                            onClick={() => setActiveTab(tab.id as TabType)}
-                            className={`relative flex items-center gap-2 px-4 md:px-5 py-2 rounded-full text-xs md:text-sm font-bold transition-colors duration-200 whitespace-nowrap focus-ring cursor-pointer ${isActive
-                                ? 'text-white'
-                                : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/60'
-                            }`}>
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id as TabType)}
+                                className={`relative flex items-center gap-2 px-4 md:px-5 py-2 rounded-full text-xs md:text-sm font-bold transition-colors duration-200 whitespace-nowrap focus-ring cursor-pointer ${isActive
+                                    ? 'text-white'
+                                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/60'
+                                    }`}>
                                 {isActive && (
-                                <motion.div
-                                    layoutId="activeTabPill"
-                                    className="absolute inset-0 bg-neutral-900 rounded-full shadow-xs z-0"
-                                    transition={{ type: "spring", stiffness: 450, damping: 32 }}
-                                />
+                                    <motion.div
+                                        layoutId="activeTabPill"
+                                        className="absolute inset-0 bg-neutral-900 rounded-full shadow-xs z-0"
+                                        transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                                    />
                                 )}
                                 <span className="relative z-10 flex items-center gap-2">
                                     <motion.span
@@ -210,13 +210,13 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
             {/*Main Worksapce Container*/}
             <div className="flex-1 p-4 md:p-8 flex justify-center">
                 <AnimatePresence mode="wait">
-                    <motion.div 
-                    key={activeTab}
-                    initial={{ opacity: 0, y: 10, scale: 0.995 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -10, scale: 0.995 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
-                    className="w-full flex justify-center"
+                    <motion.div
+                        key={activeTab}
+                        initial={{ opacity: 0, y: 10, scale: 0.995 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.995 }}
+                        transition={{ duration: 0.18, ease: "easeOut" }}
+                        className="w-full flex justify-center"
                     >
                         {/* TAB 0: SKETCH (Notebook Simulation) */}
                         {activeTab === 'Sketch' && (
@@ -231,7 +231,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                         className={`absolute -top-1 left-10 w-5 h-8 rounded-b-xs shadow-xs z-10 flex items-center justify-center font-bold text-[10px] transition-colors cursor-pointer ${project.isFavorite
                                             ? 'bg-amber-500 text-white hover:bg-amber-600'
                                             : 'bg-neutral-200 text-neutral-400 border-x border-b border-neutral-300/60 hover:bg-amber-100 hover:text-amber-600'
-                                        }`}
+                                            }`}
                                         title={project.isFavorite ? "Favorite (click to remove)" : "Not favorite (click to add)"}
                                     >
                                         ★
@@ -256,10 +256,10 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                             </div>
                                             <div className="text-[10px] space-y-0.5 font-hand">
                                                 <span className="font-bold text-rose-600 flex items-center gap-1">
-                                                ★ {sketchData.versionBadge}
+                                                    ★ {sketchData.versionBadge}
                                                 </span>
                                                 <span className="block text-neutral-500 font-medium">
-                                                Active Synthesis
+                                                    Active Synthesis
                                                 </span>
                                             </div>
                                         </div>
@@ -268,17 +268,17 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                     {/* SECTION 1: KEY MILESTONES & TARGETS */}
                                     <div className="space-y-3 pt-2">
                                         <div className="text-rose-600 font-hand font-extrabold text-sm tracking-widest uppercase flex items-center gap-1">
-                                        <span>✱ KEY MILESTONES & TARGETS ✱</span>
+                                            <span>✱ KEY MILESTONES & TARGETS ✱</span>
                                         </div>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 font-hand text-xs md:text-sm font-bold text-neutral-800">
-                                        {sketchData.mileStones.map((m, idx) => (
-                                            <div key={idx} className="flex items-center gap-2">
-                                            <span className="font-mono text-sm text-neutral-900 font-black">{m.date}</span>
-                                            <span className="text-neutral-900 font-extrabold">➔</span>
-                                            <span className="tracking-tight">{m.text}</span>
-                                            </div>
-                                        ))}
+                                            {sketchData.mileStones.map((m, idx) => (
+                                                <div key={idx} className="flex items-center gap-2">
+                                                    <span className="font-mono text-sm text-neutral-900 font-black">{m.date}</span>
+                                                    <span className="text-neutral-900 font-extrabold">➔</span>
+                                                    <span className="tracking-tight">{m.text}</span>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
 
@@ -290,67 +290,67 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                     {/* SECTION 2: WORK PROJECTS */}
                                     <div className="space-y-3">
                                         <div className="text-sky-600 font-hand font-extrabold text-sm tracking-widest uppercase flex items-center gap-2">
-                                        <span>WORK PROJECTS</span>
-                                        <span className="flex-1 h-px bg-sky-200"></span>
+                                            <span>WORK PROJECTS</span>
+                                            <span className="flex-1 h-px bg-sky-200"></span>
                                         </div>
 
                                         <div className="space-y-3 font-hand">
-                                        {sketchData.workProjects.map((wp, idx) => (
-                                            <div key={idx} className="flex items-start gap-2.5 text-xs md:text-sm leading-relaxed">
-                                            <span className="font-bold text-sky-700 text-sm shrink-0 mt-0.5">{wp.num}</span>
-                                            <div>
-                                                <strong className="font-bold text-neutral-900 uppercase tracking-tight">{wp.title}</strong>
-                                                <span className="text-neutral-400 mx-1.5">—</span>
-                                                <span className="font-medium text-neutral-700">{wp.desc}</span>
-                                            </div>
-                                            </div>
-                                        ))}
+                                            {sketchData.workProjects.map((wp, idx) => (
+                                                <div key={idx} className="flex items-start gap-2.5 text-xs md:text-sm leading-relaxed">
+                                                    <span className="font-bold text-sky-700 text-sm shrink-0 mt-0.5">{wp.num}</span>
+                                                    <div>
+                                                        <strong className="font-bold text-neutral-900 uppercase tracking-tight">{wp.title}</strong>
+                                                        <span className="text-neutral-400 mx-1.5">—</span>
+                                                        <span className="font-medium text-neutral-700">{wp.desc}</span>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
-                                    
+
 
                                     {/* SECTION 3: KEY FEATURES & ACTIONS */}
                                     <div className="space-y-3 pt-2">
                                         <div className="text-emerald-700 font-hand font-extrabold text-sm tracking-widest uppercase flex items-center gap-2">
-                                        <span>KEY FEATURES & ACTIONS</span>
-                                        <span className="flex-1 h-px bg-emerald-200"></span>
+                                            <span>KEY FEATURES & ACTIONS</span>
+                                            <span className="flex-1 h-px bg-emerald-200"></span>
                                         </div>
 
                                         <div className="space-y-2 font-hand text-xs md:text-sm">
-                                        {sketchData.keyFeatures.map((kf, idx) => (
-                                            <div key={idx} className="flex items-center justify-between pb-1.5 border-b border-dashed border-neutral-200/90">
-                                            <span className="font-bold text-neutral-800 tracking-tight">{kf.text}</span>
-                                            <div className="flex items-center gap-1.5 font-mono text-emerald-700">
-                                                {/*Array.from({ length: kf.boxesCount }).map((_, i) => (
+                                            {sketchData.keyFeatures.map((kf, idx) => (
+                                                <div key={idx} className="flex items-center justify-between pb-1.5 border-b border-dashed border-neutral-200/90">
+                                                    <span className="font-bold text-neutral-800 tracking-tight">{kf.text}</span>
+                                                    <div className="flex items-center gap-1.5 font-mono text-emerald-700">
+                                                        {/*Array.from({ length: kf.boxesCount }).map((_, i) => (
                                                 <span key={i} className="inline-block w-3.5 h-3.5 border border-emerald-600 rounded-xs"></span>
                                                 ))*/}
-                                            </div>
-                                            </div>
-                                        ))}
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
 
                                     {/* SECTION 4: DEVELOPMENT & ARCHITECTURE */}
                                     <div className="space-y-3 pt-2">
                                         <div className="text-amber-700 font-hand font-extrabold text-sm tracking-widest uppercase flex items-center gap-2">
-                                        <span>DEVELOPMENT & ARCHITECTURE</span>
-                                        <span className="flex-1 h-px bg-amber-200"></span>
+                                            <span>DEVELOPMENT & ARCHITECTURE</span>
+                                            <span className="flex-1 h-px bg-amber-200"></span>
                                         </div>
 
                                         <div className="space-y-2 font-hand text-xs md:text-sm">
-                                        {sketchData.devArchi.map((da, idx) => (
-                                            <div key={idx} className="flex items-center justify-between pb-1.5 border-b border-dashed border-neutral-200/90">
-                                            <span className="font-bold text-neutral-800 tracking-tight">{da.text}</span>
-                                            <div className="flex items-center gap-1.5 font-mono text-rose-500">
-                                                {/*Array.from({ length: da.boxesCount }).map((_, i) => (
+                                            {sketchData.devArchi.map((da, idx) => (
+                                                <div key={idx} className="flex items-center justify-between pb-1.5 border-b border-dashed border-neutral-200/90">
+                                                    <span className="font-bold text-neutral-800 tracking-tight">{da.text}</span>
+                                                    <div className="flex items-center gap-1.5 font-mono text-rose-500">
+                                                        {/*Array.from({ length: da.boxesCount }).map((_, i) => (
                                                 <span key={i} className="inline-block w-3.5 h-3.5 border border-rose-400 rounded-xs"></span>
                                                 ))*/}
-                                            </div>
-                                            </div>
-                                        ))}
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         )}
@@ -361,7 +361,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                 <div className="paper-card rounded-3xl p-6 md:p-8">
                                     <div className="flex items-center justify-between mb-6 pb-4 border-b border-neutral-100">
                                         <h2 className="text-base font-bold text-neutral-900">
-                                        MVP Action Plan
+                                            MVP Action Plan
                                         </h2>
 
                                         <div className="flex items-center gap-2">
@@ -370,8 +370,8 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                             </span>
                                             <div className="w-16 bg-neutral-100 rounded-full h-1.5 overflow-hidden">
                                                 <div
-                                                className="bg-emerald-500 h-full rounded-full transition-all duration-300"
-                                                style={{ width: `${progressPercentage}%` }}
+                                                    className="bg-emerald-500 h-full rounded-full transition-all duration-300"
+                                                    style={{ width: `${progressPercentage}%` }}
                                                 />
                                             </div>
                                         </div>
@@ -379,30 +379,30 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
 
                                     <div className="space-y-2.5">
                                         {project.mvp.mvpSteps.map((step, idx) => {
-                                        const isDone = project.completedSteps?.includes(step);
-                                        return (
-                                            <div
-                                            key={idx}
-                                            onClick={() => handleToggleStep(step)}
-                                            className={`flex items-start gap-3 p-3.5 rounded-2xl border transition-all duration-150 cursor-pointer ${isDone
-                                                ? 'bg-emerald-50/40 border-emerald-200/60 text-emerald-900 line-through opacity-80 font-normal'
-                                                : 'bg-white border-neutral-200/70 hover:border-neutral-400 text-neutral-800 font-normal'
-                                                }`}
-                                            >
-                                            <button className="mt-0.5 shrink-0 text-neutral-300 hover:text-emerald-600">
-                                                {isDone ? (
-                                                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                                                ) : (
-                                                <Circle className="w-4 h-4 text-neutral-300" />
-                                                )}
-                                            </button>
+                                            const isDone = project.completedSteps?.includes(step);
+                                            return (
+                                                <div
+                                                    key={idx}
+                                                    onClick={() => handleToggleStep(step)}
+                                                    className={`flex items-start gap-3 p-3.5 rounded-2xl border transition-all duration-150 cursor-pointer ${isDone
+                                                        ? 'bg-emerald-50/40 border-emerald-200/60 text-emerald-900 line-through opacity-80 font-normal'
+                                                        : 'bg-white border-neutral-200/70 hover:border-neutral-400 text-neutral-800 font-normal'
+                                                        }`}
+                                                >
+                                                    <button className="mt-0.5 shrink-0 text-neutral-300 hover:text-emerald-600">
+                                                        {isDone ? (
+                                                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                                        ) : (
+                                                            <Circle className="w-4 h-4 text-neutral-300" />
+                                                        )}
+                                                    </button>
 
-                                            <div className="flex-1 text-xs md:text-sm leading-snug font-normal">
-                                                <span className="font-mono text-neutral-400 mr-2">0{idx + 1}.</span>
-                                                {step}
-                                            </div>
-                                            </div>
-                                        );
+                                                    <div className="flex-1 text-xs md:text-sm leading-snug font-normal">
+                                                        <span className="font-mono text-neutral-400 mr-2">0{idx + 1}.</span>
+                                                        {step}
+                                                    </div>
+                                                </div>
+                                            );
                                         })}
                                     </div>
                                 </div>
@@ -411,44 +411,44 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
 
                         {/* TAB 2: MENTOR */}
                         {activeTab === 'Mentor' && (
-                        <div className="w-full max-w-4xl space-y-6 animate-fade-in font-sans">
-                            <div className="space-y-3">
-                                <h3 className="text-xs font-semibold text-neutral-500 uppercase tracking-wider px-1">
-                                    Framing Questions
-                                </h3>
+                            <div className="w-full max-w-4xl space-y-6 animate-fade-in font-sans">
+                                <div className="space-y-3">
+                                    <h3 className="text-xs font-semibold text-neutral-500 uppercase tracking-wider px-1">
+                                        Framing Questions
+                                    </h3>
 
-                                <div className="space-y-4">
-                                    {project.mentor.questions.map((q, idx) => {
-                                        const answer = editingAnswers[idx.toString()] || '';
+                                    <div className="space-y-4">
+                                        {project.mentor.questions.map((q, idx) => {
+                                            const answer = editingAnswers[idx.toString()] || '';
 
-                                        return (
-                                            <div
-                                            key={idx}
-                                            className="paper-card rounded-2xl p-5 space-y-3"
-                                            >
-                                                <div className="flex items-start gap-2.5">
-                                                    <span className="w-6 h-6 rounded-full bg-neutral-100 text-neutral-700 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
-                                                        Q{idx + 1}
-                                                    </span>
-                                                    <h4 className="text-xs md:text-sm font-normal text-neutral-900 leading-snug">
-                                                        {q}
-                                                    </h4>
+                                            return (
+                                                <div
+                                                    key={idx}
+                                                    className="paper-card rounded-2xl p-5 space-y-3"
+                                                >
+                                                    <div className="flex items-start gap-2.5">
+                                                        <span className="w-6 h-6 rounded-full bg-neutral-100 text-neutral-700 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                                            Q{idx + 1}
+                                                        </span>
+                                                        <h4 className="text-xs md:text-sm font-normal text-neutral-900 leading-snug">
+                                                            {q}
+                                                        </h4>
+                                                    </div>
+
+                                                    <div className="pl-8">
+                                                        <textarea
+                                                            value={answer}
+                                                            onChange={(e) => handleSaveMentorAnswer(idx, e.target.value)}
+                                                            placeholder="Write your answer..."
+                                                            className="w-full p-3 rounded-xl bg-neutral-50 border border-neutral-200/80 text-xs text-neutral-800 font-normal focus:bg-white focus:outline-none focus:ring-1 focus:ring-neutral-400 resize-none h-20 transition-all"
+                                                        />
+                                                    </div>
                                                 </div>
-
-                                                <div className="pl-8">
-                                                    <textarea
-                                                    value={answer}
-                                                    onChange={(e) => handleSaveMentorAnswer(idx, e.target.value)}
-                                                    placeholder="Write your answer..."
-                                                    className="w-full p-3 rounded-xl bg-neutral-50 border border-neutral-200/80 text-xs text-neutral-800 font-normal focus:bg-white focus:outline-none focus:ring-1 focus:ring-neutral-400 resize-none h-20 transition-all"
-                                                    />
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         )}
 
                         {/* TAB 3: TRAPS & PREREQUISITES */}
@@ -458,7 +458,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                     <div className="flex items-center gap-2 pb-3 border-b border-neutral-100 text-neutral-900">
                                         <GraduationCap className="w-4 h-4 text-neutral-700" />
                                         <h3 className="font-bold text-sm">
-                                        Skills to Acquire (5)
+                                            Skills to Acquire (5)
                                         </h3>
                                     </div>
 
@@ -466,7 +466,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                         {project.traps.skillsToLearn.map((skill, idx) => (
                                             <li key={idx} className="flex items-start gap-2.5 text-xs md:text-sm text-neutral-700 font-normal leading-relaxed">
                                                 <span className="w-5 h-5 rounded-full bg-neutral-100 text-neutral-700 font-mono text-[11px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
-                                                {idx + 1}
+                                                    {idx + 1}
                                                 </span>
                                                 <span>{skill}</span>
                                             </li>
@@ -478,7 +478,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                     <div className="flex items-center gap-2 pb-3 border-b border-neutral-100 text-neutral-900">
                                         <AlertTriangle className="w-4 h-4 text-neutral-700" />
                                         <h3 className="font-bold text-sm">
-                                        Traps to Avoid (5)
+                                            Traps to Avoid (5)
                                         </h3>
                                     </div>
 
@@ -486,7 +486,7 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                         {project.traps.trapsToAvoid.map((trap, idx) => (
                                             <li key={idx} className="flex items-start gap-2.5 text-xs md:text-sm text-neutral-700 font-normal leading-relaxed">
                                                 <span className="w-5 h-5 rounded-full bg-neutral-100 text-neutral-700 font-mono text-[11px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
-                                                {idx + 1}
+                                                    {idx + 1}
                                                 </span>
                                                 <span>{trap}</span>
                                             </li>
@@ -502,16 +502,16 @@ export const ProjectView: React.FC<ProjectViewProps> = ({
                                 <div className="paper-card rounded-3xl p-6 md:p-8 space-y-4">
                                     <div className="flex items-center justify-between pb-3 border-b border-neutral-100">
                                         <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">
-                                        Original Raw Input
+                                            Original Raw Input
                                         </h3>
                                         <span className="text-[11px] font-mono text-neutral-400">
-                                        {project.rawInput.length} chars.
+                                            {project.rawInput.length} chars.
                                         </span>
                                     </div>
 
                                     <div className="bg-neutral-50/70 rounded-2xl p-5 border border-neutral-200/80">
                                         <p className="text-xs md:text-sm text-neutral-800 leading-relaxed font-mono whitespace-pre-wrap">
-                                        {project.rawInput}
+                                            {project.rawInput}
                                         </p>
                                     </div>
                                 </div>

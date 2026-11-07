@@ -2,59 +2,59 @@
 export type TabType = 'Sketch' | 'MVP' | 'Mentor' | 'Traps' | 'Raw';
 
 export interface MvpContent {
-    mvpSteps : string[];
+    mvpSteps: string[];
 }
 
 export interface MentorContent {
-    questions : string[];
+    questions: string[];
 }
 
 export interface TrapsContent {
-    skillsToLearn : string[];
-    trapsToAvoid : string[];
+    skillsToLearn: string[];
+    trapsToAvoid: string[];
 }
 
 export interface WorkProjectItem {
-    num : string;
-    title : string;
-    desc : string;
+    num: string;
+    title: string;
+    desc: string;
 }
 
 export interface ActionCheckItem {
-    symbol : string;
-    text : string;
+    symbol: string;
+    text: string;
 }
 
 export interface MileStoneItem {
-    date : string;
-    text : string;
+    date: string;
+    text: string;
 }
 
 export interface Sketch {
-    dateTitle : string;
-    dayStamp : string;
+    dateTitle: string;
+    dayStamp: string;
     monthStamp: string;
     versionBadge: string;
-    subTitle : string;
-    mileStones : MileStoneItem[];
-    quote : string;
-    workProjects : WorkProjectItem[];
-    keyFeatures : ActionCheckItem[];
-    devArchi : ActionCheckItem[];
+    subTitle: string;
+    mileStones: MileStoneItem[];
+    quote: string;
+    workProjects: WorkProjectItem[];
+    keyFeatures: ActionCheckItem[];
+    devArchi: ActionCheckItem[];
 }
 
 export interface ProjectIdea {
-    id : string;
-    title : string;
-    oneLiner : string;
-    rawInput : string;
-    notebookSketch? : Sketch;
-    createdAt : string;
-    updatedAt? : string;
-    isFavorite? : boolean;
-    completedSteps? : string[];
-    mentorAnswers? : Record<string, string>;
-    mvp : MvpContent;
-    mentor : MentorContent;
-    traps : TrapsContent;
+    id: string;
+    title: string;
+    oneLiner: string;
+    rawInput: string;
+    notebookSketch?: Sketch;
+    createdAt: string;
+    updatedAt?: string;
+    isFavorite?: boolean;
+    completedSteps?: string[];
+    mentorAnswers?: Record<string, string>;
+    mvp: MvpContent;
+    mentor: MentorContent;
+    traps: TrapsContent;
 }

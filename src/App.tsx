@@ -10,7 +10,7 @@ import { SettingsModal } from './components/SettingsModal';
 import { generateProjectIdeaFromRawText } from './services/aiService';
 
 export const App: React.FC = () => {
-  
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeProjectId, setActiveProjectID] = useState<string | null>(null);
 
@@ -23,12 +23,12 @@ export const App: React.FC = () => {
     return localStorage.getItem('notebook_gemini_api_key') || '';
   });
 
-  const [projects, setProjects] = useState<ProjectIdea[]>(()=>{
+  const [projects, setProjects] = useState<ProjectIdea[]>(() => {
     try {
       const saved = localStorage.getItem('notebook_projects');
-      if (saved){
+      if (saved) {
         const parsed = JSON.parse(saved);
-        if(Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
       }
     } catch (e) {
       console.warn("Failed to load data from localStorage :", e);
@@ -71,11 +71,11 @@ export const App: React.FC = () => {
     setLoadingStep("Initializing analysis...");
 
     try {
-      if(apiKey){
+      if (apiKey) {
         const newProject = await generateProjectIdeaFromRawText(
-        rawInput,
-        apiKey,
-        (step) => setLoadingStep(step)
+          rawInput,
+          apiKey,
+          (step) => setLoadingStep(step)
         );
 
         setProjects((prev) => [newProject, ...prev]);
@@ -84,7 +84,7 @@ export const App: React.FC = () => {
       else {
         setIsSettingOpen(true);
       }
-      
+
     } catch (err: any) {
       console.error("Structuring error:", err);
       alert(err.message || "An error occurred while structuring the idea.");
@@ -96,18 +96,18 @@ export const App: React.FC = () => {
 
   return (
     <div className='flex h-screen bg-[#fafafa] overflow-hidden text-neutral-900 font-sans selection:bg-neutral-200'>
-      <Sidebar projectList={projects} isOpen={isSidebarOpen} activeProjectId={activeProjectId} onSelectProject={(id) => setActiveProjectID(id)} onDeleteProjecte={handleDeleteProject} onNewProject={()=>setActiveProjectID(null)} onOpenSettings={() => setIsSettingOpen(true)} onToggleFavorite={handleToggleFavorite} onToggleOpen={() => setIsSidebarOpen(!isSidebarOpen)}/>
+      <Sidebar projectList={projects} isOpen={isSidebarOpen} activeProjectId={activeProjectId} onSelectProject={(id) => setActiveProjectID(id)} onDeleteProjecte={handleDeleteProject} onNewProject={() => setActiveProjectID(null)} onOpenSettings={() => setIsSettingOpen(true)} onToggleFavorite={handleToggleFavorite} onToggleOpen={() => setIsSidebarOpen(!isSidebarOpen)} />
       <main className="flex-1 flex flex-col overflow-y-auto relative">
         {activeProject ? (
-        <ProjectView project={activeProject} onBackToHome={() => setActiveProjectID(null)} onUpdateProject={handleUpdateProject} onDeleteProject={handleDeleteProject}/>
-      ) : (
-        <BrainDumpZone onSubmitIdea={handleSubmitIdea} isLoading={isLoading} loadingProgressBar={loadingStep} />
-      )}
+          <ProjectView project={activeProject} onBackToHome={() => setActiveProjectID(null)} onUpdateProject={handleUpdateProject} onDeleteProject={handleDeleteProject} />
+        ) : (
+          <BrainDumpZone onSubmitIdea={handleSubmitIdea} isLoading={isLoading} loadingProgressBar={loadingStep} />
+        )}
       </main>
 
-      <SettingsModal isOpen={isSettingOpen} onClose={() => setIsSettingOpen(false)} apiKey={apiKey} onSaveApi={handleSaveApiKey} projects={projects} onImportProjects={handleImportProjects}/>
-      
-    </div> 
+      <SettingsModal isOpen={isSettingOpen} onClose={() => setIsSettingOpen(false)} apiKey={apiKey} onSaveApi={handleSaveApiKey} projects={projects} onImportProjects={handleImportProjects} />
+
+    </div>
   )
 };
 

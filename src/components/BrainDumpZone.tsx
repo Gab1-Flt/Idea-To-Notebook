@@ -20,7 +20,7 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
     const recognitionRef = useRef<any>(null);
 
     useEffect(() => {
-        if (textareaRef.current){
+        if (textareaRef.current) {
             textareaRef.current.focus();
         }
     }, [])
@@ -30,7 +30,7 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
         const windowWithSpeech = window as any;
         const SpeechRecognition = windowWithSpeech.SpeechRecognition || windowWithSpeech.webkitSpeechRecognition;
 
-        if (SpeechRecognition){
+        if (SpeechRecognition) {
             const recognition = new SpeechRecognition();
             recognition.continuous = true;
             recognition.lang = navigator.language;
@@ -45,7 +45,7 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
                 }
 
                 if (final) {
-                    setRawInput((prev) =>{
+                    setRawInput((prev) => {
                         const needsSpace = prev && !prev.endsWith(' ') && !prev.endsWith('\n');
                         return prev + (needsSpace ? ' ' : '') + final;
                     });
@@ -64,8 +64,8 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
         }
 
         return () => {
-            if(recognitionRef.current){
-                try{
+            if (recognitionRef.current) {
+                try {
                     recognitionRef.current.stop();
                 } catch (e) {
 
@@ -76,8 +76,8 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
 
     const toggleListening = () => {
 
-        if(isListening){
-            if(recognitionRef.current){
+        if (isListening) {
+            if (recognitionRef.current) {
                 recognitionRef.current.stop();
             }
             setIsListening(false);
@@ -92,15 +92,15 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if((e.metaKey || e.ctrlKey) && e.key === 'Enter'){
+        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
             e.preventDefault;
             handleSubmit();
         }
     };
 
     const handleSubmit = () => {
-        if(!rawInput.trim() || isLoading) return;
-        if(isListening && recognitionRef.current) {
+        if (!rawInput.trim() || isLoading) return;
+        if (isListening && recognitionRef.current) {
             recognitionRef.current.stop();
             setIsListening(false);
         }
@@ -119,7 +119,7 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
             {/*Main Container*/}
             <div className={`paper-card w-full rounded-3xl p-5 md:p-7 transition-all duration-200 
             ${isListening ? 'ring-2 ring-neutral-900 border-neutral-400 bg-white' : 'focus-within:border-neutral-400'
-            }`}>
+                }`}>
                 {/*Top Bar*/}
                 <div className="flex flex-rox justify-between items-center pb-3 mb-3 border-b border-neutral-100 text-xs text-neutral-400">
                     <span></span>
@@ -133,14 +133,14 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
                             </div>
                             <span>Listening...</span>
                         </div>) : (
-                            <span className="font-mono text-[11px] text-neutral-400">
-                                {rawInput.length > 0 ? `${rawInput.length} chars.` : ''}
-                            </span>
-                        )}
+                        <span className="font-mono text-[11px] text-neutral-400">
+                            {rawInput.length > 0 ? `${rawInput.length} chars.` : ''}
+                        </span>
+                    )}
                 </div>
 
                 {/* Text Area */}
-                <textarea 
+                <textarea
                     ref={textareaRef}
                     value={rawInput}
                     onChange={(e) => {
@@ -155,16 +155,16 @@ export const BrainDumpZone: React.FC<BrainDumpZoneProps> = ({
                 {/*Bottom Bar*/}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-neutral-100">
                     <motion.button
-                    type="button"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.94 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    onClick={toggleListening}
-                    disabled={isLoading}
-                    className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs font-medium transition-colors focus-ring cursor-pointer ${isListening
-                        ? 'bg-rose-600 text-white animate-pulse'
-                        : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200/80'
-                        }`}
+                        type="button"
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.94 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                        onClick={toggleListening}
+                        disabled={isLoading}
+                        className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs font-medium transition-colors focus-ring cursor-pointer ${isListening
+                            ? 'bg-rose-600 text-white animate-pulse'
+                            : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200/80'
+                            }`}
                     >
                         {isListening ? (
                             <>

@@ -21,7 +21,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     onImportProjects
 }) => {
     const [inputKey, setInputKey] = useState(apiKey);
-    const [savedSuccess, setSavedSuccess]= useState(false);
+    const [savedSuccess, setSavedSuccess] = useState(false);
 
     const handleSave = () => {
         onSaveApi(inputKey.trim());
@@ -112,10 +112,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                             <label className="text-xs font-semibold text-neutral-800 flex items-center justify-between">
                                 <span>Google Gemini API Key (Optional):</span>
                                 <a
-                                href="https://aistudio.google.com/app/apikey"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="text-amber-600 hover:underline text-[11px] font-medium flex items-center gap-1"
+                                    href="https://aistudio.google.com/app/apikey"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="text-amber-600 hover:underline text-[11px] font-medium flex items-center gap-1"
                                 >
                                     <Info className="w-3 h-3" /> Get a free key
                                 </a>
@@ -131,7 +131,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
                             <div className="flex items-center justify-between pt-1">
                                 <p className="text-[11px] text-neutral-400 leading-snug">
-                                If no key is provided, the app runs incubation using the offline intelligent engine.
+                                    If no key is provided, the app runs incubation using the offline intelligent engine.
                                 </p>
 
                                 <motion.button
